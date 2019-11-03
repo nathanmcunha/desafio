@@ -59,6 +59,7 @@ public class ProdutoController {
 			record.setCodigoDeBarras(produto.getCodigoDeBarras());
 			record.setDescricao(produto.getDescricao());
 			record.setQuantidade(produto.getQuantidade());
+			record.setCategoria(produto.getCategoria());
 			Produto updated = repository.save(record);
 			return ResponseEntity.ok().body(updated);
 		}).orElse(ResponseEntity.notFound().build());

@@ -16,9 +16,8 @@ import {Observable} from "rxjs";
 export class UpdateProdutoComponent implements OnInit {
 
   id: number;
-  idCategoria:number
   produto: Produto;
-  categoria :Observable<any>
+  categoria :Categoria
   categorias:Observable<any[]>;
 
   constructor(private route: ActivatedRoute, private router: Router,
@@ -27,8 +26,8 @@ export class UpdateProdutoComponent implements OnInit {
 
   ngOnInit() {
     this.produto = new Produto();
+    this.categoria = new Categoria()
     this.id = this.route.snapshot.params['id'];
-    this.idCategoria = this.route.snapshot.params['idCategoria'];
     this.getCategorias();
     this.produtoService.getProduto(this.id)
       .subscribe(data => {
@@ -38,11 +37,13 @@ export class UpdateProdutoComponent implements OnInit {
   }
 
   updateProduto() {
-    this.categoria = this.categoriaService.getCategoria(this.idCategoria);
     this.produto.categoria = this.categoria;
+    console.log("JSONIFY");
+    console.log(JSON.stringify(this.produto));
     this.produtoService.updateProduto(this.id, this.produto)
       .subscribe(data => console.log(data), error => console.log(error));
     this.produto = new Produto();
+    this.categoria = new Categoria()
     this.gotoList();
   }
   onSubmit() {
@@ -56,6 +57,13 @@ export class UpdateProdutoComponent implements OnInit {
   getCategorias() {
     this.categorias = this.categoriaService.getCategoriaList();
     console.log("Categorias: "+JSON.stringify(this.categorias));
+  }
+  getCategoria(){
+    this.categoriaService.getCategoria(this.categoria.id)
+      .subscribe(data => {
+      console.log(data)
+      this.produto.categoria = data;
+    }, error => console.log(error));
   }
 
 
