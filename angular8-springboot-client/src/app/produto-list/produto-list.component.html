@@ -1,1 +1,32 @@
-<p>produto-list works!</p>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Produtos</h2>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Codigo de Barras</th>
+        <th>Nome</th>
+        <th>Descricao</th>
+        <th>Quantidade</th>
+        <th>Categoria</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let produto of produtos | async">
+        <td>{{produto.codigoDeBarras}}</td>
+        <td>{{produto.nome}}</td>
+        <td>{{produto.descricao}}</td>
+        <td>{{produto.quantidade}}</td>
+        <td>{{produto.categoria.nome}}</td>
+
+        <td><button (click)="deleteProduto(produto.id)" class="btn btn-danger">Delete</button>
+          <button (click)="produtoDetails(produto.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
+          <button (click)="updateProdutos(produto.id)" class="btn btn-info" style="margin-left: 10px">Update</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

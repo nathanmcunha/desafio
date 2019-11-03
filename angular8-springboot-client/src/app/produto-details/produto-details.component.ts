@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Produto } from '../produto';
+import { ProdutoService } from '../produto.service';
+import { ProdutoListComponent } from '../produto-list/produto-list.component';
+import { Router, ActivatedRoute } from '@angular/router'
+
 @Component({
   selector: 'app-produto-details',
   templateUrl: './produto-details.component.html',
@@ -7,9 +12,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProdutoDetailsComponent implements OnInit {
 
-  constructor() { }
+  id: number;
+  produto: Produto;
+
+  constructor(private route: ActivatedRoute,private router: Router,
+              private produtoService: ProdutoService) { }
 
   ngOnInit() {
+    this.produto = new Produto();
+
+    this.id = this.route.snapshot.params['id'];
+
+    this.produtoService.getProduto(this.id)
+      .subscribe(data => {
+        console.log(data)
+        this.produto = data;
+      }, error => console.log(error));
+  }
+
+  list(){
+    this.router.navigate(['produtos']);
+  }
+
+  listCategorias(){
+    this.router.navigate(['categoria']);
   }
 
 }

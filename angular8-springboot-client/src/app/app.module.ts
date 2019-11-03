@@ -8,6 +8,11 @@ import { ProdutoListComponent } from './produto-list/produto-list.component';
 import { CreateCategoriaComponent } from './create-categoria/create-categoria.component';
 import { CategoriaDetailsComponent } from './categoria-details/categoria-details.component';
 import { CategoriaListComponent } from './categoria-list/categoria-list.component';
+import {FormsModule} from "@angular/forms";
+import { NgSelectModule } from '@ng-select/ng-select';
+import { UpdateProdutoComponent } from './update-produto/update-produto.component';
+import {AppRoutingModule} from "./app-routing.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -17,10 +22,15 @@ import { CategoriaListComponent } from './categoria-list/categoria-list.componen
     ProdutoListComponent,
     CreateCategoriaComponent,
     CategoriaDetailsComponent,
-    CategoriaListComponent
+    CategoriaListComponent,
+    UpdateProdutoComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
