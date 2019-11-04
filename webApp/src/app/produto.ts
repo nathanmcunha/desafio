@@ -8,5 +8,5 @@ export class Produto {
   nome:string;
   descricao:string;
   quantidade:number;
-  categoria:Observable<any>;
+  categoria:Categoria;
 }
